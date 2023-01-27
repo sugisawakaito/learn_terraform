@@ -1,5 +1,11 @@
-# help: ## ヘルプを表示する
-#     @grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+include .env
+
+show_env: ## 環境変数を表示する
+	@echo $(TARGET_EC2_IMAGE)
+	@echo $(KEY_PAIR_NAME)
+
+help: ## ヘルプを表示する
+    @grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 init: ## terraform init を実行
 	terraform init
@@ -13,17 +19,17 @@ plan: fmt ## terraform plan を実行する
 apply: plan ## terraform apply を実行する
 	terraform apply --auto-approve
 
-show: ## terraform show を実行する
-	terraform show
-
 destroy: ## terraform destroy を実行する
 	terraform destroy
-
-refresh: ## terraform refresh を実行する
-	terraform refresh:w
 
 fmt: validate ## terraform fmt を実行する
 	terraform fmt
 
 # test: ## ローカル環境で circleci を実行する
 #     circleci build .circleci/config.yml
+
+ec2_describe_images:
+	aws ec2 describe-images --image-ids $(TARGET_EC2_IMAGE)
+
+ssh-keygen:
+	scripts/make_keypair.sh
