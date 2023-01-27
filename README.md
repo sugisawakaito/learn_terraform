@@ -4,6 +4,10 @@ bellow is what i wanna make!
 2. make CI/CD pipelines by github actions
 3. replace ec2 to ecs
 
+And Addvance things What I wanna do is...
+
+1. make scripts (please see /scripts!) due to everyone join same project can know how's made infrastructure if I leave the project!
+
 schedule what I gonna make
 
 - First Round
