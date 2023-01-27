@@ -6,7 +6,7 @@ bellow is what i wanna make!
 
 And Addvance things What I wanna do is...
 
-1. make scripts (please see /scripts!) due to everyone join same project can know how's made infrastructure if I leave the project!
+1. make bash scripts (please see /scripts!) due to everyone join same project can know how's made infrastructure if I leave the project!
 
 schedule what I gonna make
 
