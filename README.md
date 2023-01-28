@@ -1,3 +1,6 @@
+Please watch Notion How's resoluve what I encount stuck
+https://www.notion.so/Terraform-734b292ca3a64e3784177a882addfc74
+
 bellow is what i wanna make!
 
 1. make ec2 and needed something configures with ec2 (vpc etc...)
