@@ -5,14 +5,14 @@ services:
     command: ./proto/scripts/protoc.sh
     build:
       context: .
-      dockerfile: DockerfileProto
+      dockerfile: docker/DockerfileProto
     volumes:
       - .:/proto
   server:
     container_name: server
     build:
       context: .
-      dockerfile: DockerfileServer
+      dockerfile: docker/DockerfileServer
     volumes:
       - ./server:/go/src
     ports:
@@ -22,7 +22,9 @@ services:
       - proto
   mysql:
     image: mysql:5.7
-    build: mysql
+    build: 
+      context: .
+      dockerfile: docker/DockerfileMysql
     container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -40,7 +42,7 @@ services:
     container_name: envoy
     build:
       context: .
-      dockerfile: DockerfileEnvoy
+      dockerfile: docker/DockerfileEnvoy
     ports:
       - "8080:8080"
     links:
@@ -50,7 +52,7 @@ services:
     command: ./scripts/client.sh
     build:
       context: .
-      dockerfile: DockerfileClient
+      dockerfile: docker/DockerfileClient
     volumes:
       - ./client:/client
       - /client/node_modules

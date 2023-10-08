@@ -43,3 +43,5 @@ terraform.rc
 
 tastylog-dev-keypair.pem
 tastylog-dev-keypair.pub
+
+mysql/mysql_volume/
