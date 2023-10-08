@@ -74,7 +74,6 @@ resource "aws_db_instance" "mysql_standalone" {
   publicly_accessible = false
   port                = 3306
 
-  name                 = "db_name_tastylog"
   parameter_group_name = aws_db_parameter_group.mysql_standalone_parameter_group.name
   option_group_name    = aws_db_option_group.mysql_standalone_option_group.name
 
