@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"golang.org/x/xerrors"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/plugin/dbresolver"
@@ -24,7 +25,7 @@ func DBConnect() {
 
 	Db, err = gorm.Open(mysql.Open(dsn1), &gorm.Config{})
 	if err != nil {
-		panic(err.Error())
+		panic(xerrors.Errorf("failed to connect database: %w", err))
 	}
 
 	dsnRep := USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME + "?parseTime=true"

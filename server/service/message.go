@@ -1,17 +1,22 @@
 package service
 
 import (
+	"context"
+	"server/infrastructure/dao"
 	"server/model"
 	"server/repository"
-	"server/infrastructure/dao"
+
+	"github.com/bluele/go-timecop"
+	"golang.org/x/xerrors"
+	"gorm.io/gorm"
 )
 
 type (
-	messengerService interface {
-		CreateUser() (*model.User, error)
+	MessengerService interface {
+		CreateUser(ctx context.Context, tx *gorm.DB, msg string) error
 	}
 
-	MessengerService struct{
+	messengerService struct {
 		userRepository repository.UserRepository
 	}
 )
@@ -22,6 +27,15 @@ func NewMessengerService() MessengerService {
 	}
 }
 
-func (s *MessengerService) CreateUser() (*model.User, error) {
-	return nil, nil
+func (s *messengerService) CreateUser(ctx context.Context, tx *gorm.DB, msg string) error {
+	now := timecop.Now()
+	user := &model.User{
+		Email:     msg,
+		FullName:  msg,
+		CreatedAt: now,
+	}
+	if err := s.userRepository.CreateUser(ctx, tx, user); err != nil {
+		return xerrors.Errorf("failed to create user: %w", err)
+	}
+	return nil
 }
